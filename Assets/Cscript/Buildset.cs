@@ -31,13 +31,16 @@ public class Buildset : MonoBehaviour
     public GameObject Image_09;
     public GameObject Image_10;
     public GameObject Image_11;
+    public GameObject Image_12;
+    public GameObject Image_13;
+    public GameObject Image_14;
     public List<Build> signall = new()
     {
-        sign_00, sign_01, sign_02, sign_03, sign_04, sign_05, sign_06, sign_07, sign_08, sign_09, sign_10, sign_11
+        sign_00, sign_01, sign_02, sign_03, sign_04, sign_05, sign_06, sign_07, sign_08, sign_09, sign_10, sign_11, sign_12, sign_13, sign_14
     };
     public List<Build> signinchest = new()
     {
-        sign_00, sign_01, sign_02, sign_03, sign_04, sign_05, sign_06, sign_07, sign_08, sign_09, sign_10, sign_11
+        sign_00, sign_01, sign_02, sign_03, sign_04, sign_05, sign_06, sign_07, sign_08, sign_09, sign_10, sign_11, sign_12, sign_13, sign_14
     };
     public void Start()
     {
@@ -63,7 +66,7 @@ public class Buildset : MonoBehaviour
     public static Build sign_00 = new()
     {
         index = 0,
-        info = "神社\n放置时：发现符札团子\n新的一天：1格内+1水"
+        info = "神社\n放置时：发现符札团子\n新的一天：1格内+2水"
     };
     public static Build sign_01 = new()
     {
@@ -78,7 +81,7 @@ public class Buildset : MonoBehaviour
     public static Build sign_03 = new()
     {
         index = 3,
-        info = "雾之湖\n放置时：发现水团子、冰团子、雪团子并减半耗时\n持续：1格内+3水"
+        info = "雾之湖\n放置时：发现水团子、冰团子、雪团子并减1/3耗时\n持续：1格内+3水"
     };
     public static Build sign_04 = new()
     {
@@ -120,6 +123,21 @@ public class Buildset : MonoBehaviour
         index = 11,
         info = "地灵殿\n放置时：发现读心团子和自闭团子\n新的一天：2格内永久水<0的格子+1水"
     };
+    public static Build sign_12 = new()
+    {
+        index = 12,
+        info = "咖啡店\n放置时：发现红酒团子\n新的一天：2格内的每个团子使时间回退00:05"
+    };
+    public static Build sign_13 = new()
+    {
+        index = 13,
+        info = "寺院\n放置时：发现僵尸团子\n新的一天：2格内空格+1水"
+    };
+    public static Build sign_14 = new()
+    {
+        index = 14,
+        info = "核能中心\n放置时：发现核能团子\n放置时：所有格子+2水\n新的一天：4格内-1水"
+    };
 
     public void Put(Build sign, Hex hex)
     {
@@ -144,11 +162,11 @@ public class Buildset : MonoBehaviour
             case 3:
                 Dangoset.instance.Box(Dangoset.instance.dango_12);
                 Dangoset.instance.Box(Dangoset.instance.dango_17);
-                Dangoset.instance.dango_01.time -= Dangoset.instance.dango_01.time / 2;
+                Dangoset.instance.dango_01.time -= Dangoset.instance.dango_01.time / 3;
                 Dangoset.instance.boxs.Find(db => db.refer_dango.index == Dangoset.instance.dango_01.index).time.text = Game.Time(Dangoset.instance.dango_01.time);
-                Dangoset.instance.dango_12.time -= Dangoset.instance.dango_12.time / 2;
+                Dangoset.instance.dango_12.time -= Dangoset.instance.dango_12.time / 3;
                 Dangoset.instance.boxs.Find(db => db.refer_dango.index == Dangoset.instance.dango_12.index).time.text = Game.Time(Dangoset.instance.dango_12.time);
-                Dangoset.instance.dango_17.time -= Dangoset.instance.dango_17.time / 2;
+                Dangoset.instance.dango_17.time -= Dangoset.instance.dango_17.time / 3;
                 Dangoset.instance.boxs.Find(db => db.refer_dango.index == Dangoset.instance.dango_17.index).time.text = Game.Time(Dangoset.instance.dango_17.time);
                 foreach (Hex h in hex.Distance(Map.instance.hexs, 1))
                 {
@@ -199,6 +217,19 @@ public class Buildset : MonoBehaviour
                 Dangoset.instance.Box(Dangoset.instance.dango_49);
                 Dangoset.instance.Box(Dangoset.instance.dango_50);
                 break;
+            case 12:
+                Dangoset.instance.Box(Dangoset.instance.dango_09);
+                break;
+            case 13:
+                Dangoset.instance.Box(Dangoset.instance.dango_61);
+                break;
+            case 14:
+                Dangoset.instance.Box(Dangoset.instance.dango_51);
+                foreach(Hex h in Map.instance.hexs_active)
+                {
+                    h.Water_pe(2);
+                }
+                break;
         }
         if (PlayerPrefs.GetInt("s" + sign.index.ToString()) == 0)
         {
@@ -233,6 +264,9 @@ public class Buildset : MonoBehaviour
             9 => Image_09,
             10 => Image_10,
             11 => Image_11,
+            12 => Image_12,
+            13 => Image_13,
+            14 => Image_14,
             _ => null
         };
     }
@@ -313,8 +347,8 @@ public class Buildset : MonoBehaviour
                 break;
         }
         built++;
-        build -= (6 + 2 * built);
-        tbuild.text = build.ToString() + "/" + (8 + 2 * built);
+        build -= 8;
+        tbuild.text = build.ToString() + "/" + 8;
     }
     public void BuildEvent()
     {

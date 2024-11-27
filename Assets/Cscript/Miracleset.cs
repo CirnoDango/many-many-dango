@@ -9,7 +9,7 @@ public class Miracleset : MonoBehaviour
 {
     public static Miracleset instance;
     public int miracle = 0;
-    public int miracled_event = 0;
+    public int miracle_demand = 1;
     public Text tmiracle;
     public GameObject miraclebox;
     public GameObject librarybox;
@@ -19,8 +19,8 @@ public class Miracleset : MonoBehaviour
     public GameObject miracle2;
     public GameObject miracle3;
 
-    public List<Miracle> miracleall = new() { mrc_00, mrc_01, mrc_02, mrc_03, mrc_04, mrc_05, mrc_06, mrc_07, mrc_08,mrc_09 };
-    public List<Miracle> miracleinchest = new() { mrc_00, mrc_01, mrc_02, mrc_03, mrc_04, mrc_05, mrc_06, mrc_07, mrc_08, mrc_09 };
+    public List<Miracle> miracleall = new() { mrc_00, mrc_01, mrc_02, mrc_03, mrc_04, mrc_05, mrc_06, mrc_07, mrc_08,mrc_09, mrc_10 };
+    public List<Miracle> miracleinchest = new() { mrc_00, mrc_01, mrc_02, mrc_03, mrc_04, mrc_05, mrc_06, mrc_07, mrc_08, mrc_09, mrc_10 };
     public void Start()
     {
         instance = this;
@@ -84,12 +84,17 @@ public class Miracleset : MonoBehaviour
     public static Miracle mrc_08 = new()
     {
         index = 8,
-        info = "+8建筑"
+        info = "+6建筑"
     };
     public static Miracle mrc_09 = new()
     {
         index = 9,
         info = "宝箱团子-6水需求"
+    };
+    public static Miracle mrc_10 = new()
+    {
+        index = 10,
+        info = "扩大地图(C)"
     };
     public void Miracle()
     {
@@ -97,7 +102,7 @@ public class Miracleset : MonoBehaviour
         switch (k)
         {
             case 0:
-                Game.Info("You have achieved all miracles!");
+                MiracleEnd();
                 return;
             case 1:
                 Miracle m1 = miracleinchest[0];
@@ -243,7 +248,10 @@ public class Miracleset : MonoBehaviour
                 Dangoset.instance.dango_02.water -= 6;
                 Dangoset.instance.boxs.Find(d31 => d31.refer_dango.index == 2).twater.text = Dangoset.instance.dango_02.water.ToString();
                 break;
-    }
+            case 10:
+                Map.instance.NextMap();
+                break;
+        }
 
         if (PlayerPrefs.GetInt("m" + index.ToString()) == 0)
         {
@@ -267,7 +275,7 @@ public class Miracleset : MonoBehaviour
         switch (index)
         {
             case 8:
-                Game.Build(8);
+                Game.Build(6);
                 break;
 
         }
@@ -275,9 +283,11 @@ public class Miracleset : MonoBehaviour
 
     public void MiracleEnd()
     {
-        miracled_event++;
-        miracle -= miracled_event;
-        tmiracle.text = miracle.ToString() + "/" + (miracled_event + 1);
+        miracle -= miracle_demand;
+        miracle_demand += (miracle_demand / 10) + 1;
+        Debug.Log(miracle);
+        Debug.Log(miracle_demand);
+        tmiracle.text = miracle.ToString() + "/" + miracle_demand;
         Destroy(miracle1);
         Destroy(miracle2);
         Destroy(miracle3);

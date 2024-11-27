@@ -37,6 +37,7 @@ public class Map : MonoBehaviour
     public int yuyuko = 6;
     public GameObject youreaten;
     public GameObject youreatenbg;
+    public Text score;
     public GameObject info;
     public Text tinfo;
 
@@ -133,8 +134,9 @@ public class Map : MonoBehaviour
 
     public void Time(int t)
     {
-        if ((time + t) / 1440 >= day)// && Game.Clickmode() == "put")
+        if ((time + t) / 1440 >= day)
         {
+            day++;
             Game.Events("eat");
         }
         time += t;
@@ -143,14 +145,11 @@ public class Map : MonoBehaviour
 
     public void Eatstart()
     {
-        day += 1;
         tdango.color = new Color(1, 1, 0.5f);
         if (food < yuyuko)
         {
             Game.Clickmode("gameover");
-            youreaten.SetActive(true);
-            youreatenbg.SetActive(true);
-            PlayerPrefs.SetInt("day", Mathf.Max(PlayerPrefs.GetInt("day"), day - 1));
+            Gameover(100 * (day - 1) + 100 * (real_yuyuko - (yuyuko - food)) / real_yuyuko); ;
         }
         if (Game.Yuyuko() <= 0)
         {
@@ -168,5 +167,17 @@ public class Map : MonoBehaviour
             }
             Dangoset.instance.Newday();
         }
+    }
+
+    public void Gameover(int score)
+    {
+        youreaten.SetActive(true);
+        youreatenbg.SetActive(true);
+        if (!Dangoset.instance.cheat)
+        {
+            PlayerPrefs.SetInt("day", Mathf.Max(PlayerPrefs.GetInt("day"), day - 1));
+            PlayerPrefs.SetInt("score", Mathf.Max(PlayerPrefs.GetInt("score"), score));
+        }
+        this.score.text = "Score:" + score.ToString();
     }
 }

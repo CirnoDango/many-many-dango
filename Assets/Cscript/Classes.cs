@@ -16,6 +16,7 @@ public class Hex
     public int dango18 = 0;
     public int dango34 = 0;
     public string dango59 = "";
+    public bool dango69 = false;
     public GameObject td34;
     public GameObject image;
     public GameObject godan;
@@ -96,6 +97,7 @@ public class Dango
     public int food;
     public int time;
     public string info;
+    public string note;
     public bool dango15 = false;
     public bool dango28 = false;
     public bool dango35 = false;
@@ -208,6 +210,10 @@ public class Game
                     Cancel();
                     Info("choose a hex to +7 water");
                     break;
+                case "dango19":
+                    Cancel();
+                    Info("choose a hex to move");
+                    break;
                 case "dango24":
                     Cancel();
                     Info("feed yuyuko a dango");
@@ -242,6 +248,14 @@ public class Game
                 case "dango55":
                     Cancel();
                     Info("choose a dango to crush into 3 water");
+                    break;
+                case "dango64":
+                    Cancel();
+                    Info("choose a >" + Dangoset.instance.dango_64.water + " hex to move");
+                    break;
+                case "dango70":
+                    Cancel();
+                    Info("choose a hex to +4 water");
                     break;
             }
             //if (Dangoset.instance.newdaying && mode[0] == "put"){ Dangoset.instance.Newday();}
@@ -312,23 +326,24 @@ public class Game
             Events().Remove(Events()[0]);
         }
     }
-    public static bool Miracle(int m)
+    public static void Miracle(int m)
     {
         Miracleset.instance.miracle += m;
-        Miracleset.instance.tmiracle.text = Miracleset.instance.miracle.ToString() +"/" + (Miracleset.instance.miracled_event + 1);
-        if (Miracleset.instance.miracle - m < Miracleset.instance.miracled_event + 1 &&(Miracleset.instance.miracle >= Miracleset.instance.miracled_event + 1))
+        Miracleset.instance.tmiracle.text = Miracleset.instance.miracle.ToString() +"/" + Miracleset.instance.miracle_demand;
+        if (Miracleset.instance.miracle >= Miracleset.instance.miracle_demand)
         {
+            foreach (string e in Dangoset.instance.Events)
+            {
+                if (e == "miracle") { return; }
+            }
             Events("miracle");
-            
-            return true;
         }
-        return false;
     }
     public static void Build(int m)
     {
         Buildset.instance.build += m;
-        Buildset.instance.tbuild.text = Buildset.instance.build.ToString() + "/" + (Buildset.instance.built * 2 + 8);
-        if (Buildset.instance.build >= (Buildset.instance.built * 2 + 8))
+        Buildset.instance.tbuild.text = Buildset.instance.build.ToString() + "/" + 8;
+        if (Buildset.instance.build >= 8)
         {
             Events("Build");
             Miracle(1);

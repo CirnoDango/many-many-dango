@@ -30,6 +30,11 @@ public class Ahex : MonoBehaviour
                         Dangoset.instance.dango19 = hex;
                         Game.Events("dango19");
                     }
+                    if (!hex.empty && hex.dango.index == 64)
+                    {
+                        Dangoset.instance.dango64 = hex;
+                        Game.Events("dango64");
+                    }
                     if (!hex.empty && hex.dango.index == 54)
                     {
                         List<Hex> eh = new();
@@ -88,7 +93,7 @@ public class Ahex : MonoBehaviour
                             {
                                 if (!hex.empty)
                                 {
-                                    Map.instance.Time(hex.dango.time);
+                                    Map.instance.Time(Game.Active_dango().time);
                                 }
                                 else
                                 {
@@ -111,6 +116,20 @@ public class Ahex : MonoBehaviour
                                 Map.instance.Time(30 * (Dangoset.instance.dango_16.water - hex.water));
                             }
                         }
+                        if (Game.Active_dango().index == 62)
+                        {
+                            if (hex.x != Map.instance.smx && hex.x != Map.instance.snx &&
+                                hex.y != Map.instance.smy && hex.y != Map.instance.sny &&
+                                hex.z != Map.instance.smz && hex.z != Map.instance.snz)
+                            {
+                                Map.instance.Time(120);
+                            }
+                        }
+                        if (Game.Active_dango().index == 11)
+                        {
+                            if (Map.instance.time % 1440 == 0) { Map.instance.Time(1440); }
+                            Map.instance.Time(1440 - Map.instance.time % 1440);
+                        }
                     }
                     
                 }
@@ -122,6 +141,7 @@ public class Ahex : MonoBehaviour
                     Game.Yuyuko(-hex.dango.food);
                     Game.Food(-hex.dango.food);
                     Dangoset.instance.Eat(Map.instance.hexs, hex);
+                    if (Game.Food() < Game.Yuyuko()) { Map.instance.Gameover(100 * (Map.instance.day - 1) + 100 * Game.Food() / Game.Yuyuko()); }
                     foreach(Hex h in hex.Distance(Map.instance.hexs, 1))
                     {
                         if(h.sign && h.build.index == 7)
@@ -170,7 +190,9 @@ public class Ahex : MonoBehaviour
                 if (!hex.empty)
                 {
                     if (hex.dango.food == 0) { return; }
-                    Map.instance.Time(-hex.dango.food * 15);
+                    int d69 = 0;
+                    if(hex.dango.index == 69 && hex.dango69) { d69 = 3; }
+                    Map.instance.Time(-(hex.dango.food + d69) * 15);
                     Game.Food(-hex.dango.food);
                     Dangoset.instance.Eat(Map.instance.hexs, hex);
                     
@@ -330,8 +352,23 @@ public class Ahex : MonoBehaviour
                     Dangoset.instance.dango30.Water_pe(3);
                 }
                 break;
-                
-
+            case "dango64":
+                if (hex.Distance(Map.instance.hexs, 0).Contains(Dangoset.instance.dango64))
+                {
+                    Game.EventExecute();
+                    break;
+                }
+                if (hex.Distance(Map.instance.hexs, 1).Contains(Dangoset.instance.dango64) && hex.empty && hex.water >= Dangoset.instance.dango_64.water)
+                {
+                    Game.EventExecute();
+                    Dangoset.instance.Put(Map.instance.hexs, Dangoset.instance.dango_64, hex);
+                    Dangoset.instance.Eat(Map.instance.hexs, Dangoset.instance.dango64);
+                }
+                break;
+            case "dango70":
+                hex.Water_pe(4);
+                Game.EventExecute();
+                break;
 
         } 
     }
