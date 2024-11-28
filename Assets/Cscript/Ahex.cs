@@ -49,7 +49,7 @@ public class Ahex : MonoBehaviour
                         Map.instance.Time(30);
                         return;
                     }
-                    if (((hex.empty && (hex.water >= Game.Active_dango().water || Game.Active_dango().index == 16)) || (hex.dango18 < 3 && hex.dango18 >= 1 && Game.Active_dango().index == 18 && hex.water >= Game.Active_dango().water)) || Dangoset.instance.waterhack)
+                    if ((hex.empty && ((hex.water >= Game.Active_dango().water && Game.Active_dango().index != 71) || Game.Active_dango().index == 16 || (Game.Active_dango().index == 71 && hex.water <= Game.Active_dango().water) )) || (hex.dango18 < 3 && hex.dango18 >= 1 && Game.Active_dango().index == 18 && hex.water >= Game.Active_dango().water) || Dangoset.instance.waterhack)
                     {
                         Game.Food(Game.Active_dango().food);
                         foreach(Hex h in hex.Distance(Map.instance.hexs_active,1))
@@ -81,6 +81,11 @@ public class Ahex : MonoBehaviour
                                     Dangoset.instance.Put(Map.instance.hexs, d, lh[r.Next(lh.Count)]);
                                 }
                             }
+                            if(!h.empty && h.dango.index == 76)
+                            {
+                                Game.Yuyuko(-1);
+                                Map.instance.Time(20);
+                            }
                         }
 
                         if (Dangoset.instance.sign2 && hex.Distance(Map.instance.hexs_active,1).Contains(Map.instance.hexs_active.Find(h => h.sign && h.build.index == 2)))
@@ -108,8 +113,12 @@ public class Ahex : MonoBehaviour
                         }
 
                         Dangoset.instance.sign2 = false;
-
-                        if(Game.Active_dango().index == 16)
+                        if (Game.Active_dango().index == 11)
+                        {
+                            if (Map.instance.time % 1440 == 0) { Map.instance.Time(1440); }
+                            Map.instance.Time(1440 - Map.instance.time % 1440);
+                        }
+                        if (Game.Active_dango().index == 16)
                         {
                             if(hex.water < Dangoset.instance.dango_16.water)
                             {
@@ -125,11 +134,7 @@ public class Ahex : MonoBehaviour
                                 Map.instance.Time(120);
                             }
                         }
-                        if (Game.Active_dango().index == 11)
-                        {
-                            if (Map.instance.time % 1440 == 0) { Map.instance.Time(1440); }
-                            Map.instance.Time(1440 - Map.instance.time % 1440);
-                        }
+                        
                     }
                     
                 }
@@ -367,6 +372,43 @@ public class Ahex : MonoBehaviour
                 break;
             case "dango70":
                 hex.Water_pe(4);
+                Game.EventExecute();
+                break;
+            case "dango71":
+                hex.Water_pe(-2 * hex.water);
+                Game.EventExecute();
+                break;
+            case "dango72":
+                if(!hex.empty && !hex.dango.dango72)
+                {
+                    hex.dango.dango72 = true;
+                    hex.dango.food *= 2;
+                    hex.dango.time *= 2; 
+                    Dangoset.instance.boxs.Find(db => db.refer_dango.index == hex.dango.index).time.text = Game.Time(hex.dango.time);
+                    foreach(Hex h in Map.instance.hexs_active)
+                    {
+                        if(h.dango == hex.dango)
+                        {
+                            Game.Food(hex.dango.food / 2);
+                        }
+                    }
+                }
+                Game.EventExecute();
+                break;
+            case "dango79":
+                if (!hex.empty && !hex.sign)
+                {
+                    Game.Food(-hex.dango.food);
+                    Game.Build(hex.dango.food);
+                    Dangoset.instance.Eat(Map.instance.hexs, hex);
+                }
+                Game.EventExecute();
+                break;
+            case "dango80":
+                if (hex.empty)
+                {
+                    Dangoset.instance.Put_silent(Map.instance.hexs_active, Dangoset.instance.dango_80, hex);
+                }
                 Game.EventExecute();
                 break;
 

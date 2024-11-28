@@ -917,7 +917,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1991721166}
   m_HandleRect: {fileID: 1991721165}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1774,7 +1774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00008201599}
+  m_AnchoredPosition: {x: 0, y: -0.000045776367}
   m_SizeDelta: {x: 100, y: 250.329}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &519420028
@@ -2658,6 +2658,16 @@ MonoBehaviour:
   Image_68: {fileID: 8033120185133424897, guid: 5f51ec1fd79072f4db7002bfa26defbc, type: 3}
   Image_69: {fileID: 1700510501264379971, guid: 7c47fe485f3dc6f49bc4d73d86e723ad, type: 3}
   Image_70: {fileID: 6717075751432351575, guid: b77cddca2355d0f45bdebe3a779a8492, type: 3}
+  Image_71: {fileID: 6127374476269564491, guid: b7563e4f66e77cb4988bbc7ac16d7a1c, type: 3}
+  Image_72: {fileID: 1225009733654984507, guid: e205a3228113f7842b5e232ebabbca9d, type: 3}
+  Image_73: {fileID: 7817547993191376945, guid: be7349c2b7116184c9873d9ae33b2116, type: 3}
+  Image_74: {fileID: 1234540712835322313, guid: 60a610507b7d21844974c82b78afc2ff, type: 3}
+  Image_75: {fileID: 6764908856033861428, guid: 4b4908517e7fe77418c89eada69dcf5e, type: 3}
+  Image_76: {fileID: 1261356815783314246, guid: e7d2e2cd250a80944b9c622818bf00f4, type: 3}
+  Image_77: {fileID: 8719504515755964746, guid: 4ac29e561ee597346807e2b8b1286e26, type: 3}
+  Image_78: {fileID: 8674812750581224249, guid: c824553c49a6a1b4caad3fbe316c5643, type: 3}
+  Image_79: {fileID: 5894475748277928612, guid: 9f2fb736e633eab4dbeb0700e9269841, type: 3}
+  Image_80: {fileID: 3706713488121390607, guid: d33ad35ef10dcff499cc0a512b0cb2f3, type: 3}
   boxbox: {fileID: 516448212}
   librarybox: {fileID: 1081604576}
   librarydb: []
@@ -2733,6 +2743,9 @@ MonoBehaviour:
   Image_12: {fileID: 1200014199435499663, guid: 5a1eb4b9ff6c4464cb94f6450a29c34c, type: 3}
   Image_13: {fileID: 1327330410071417698, guid: 79fbc6bbfd916fd4c9bd61438a01d106, type: 3}
   Image_14: {fileID: 3082819946741283594, guid: 05c46d9ea18b4094d81b580f8bdbcc5a, type: 3}
+  Image_15: {fileID: 6449020955644282178, guid: 012b806adb831f44bbe03c95748f0f1d, type: 3}
+  Image_16: {fileID: 4250760952226635150, guid: 0611e4d0b8869354fbbc2a3a3e5f74ad, type: 3}
+  Image_17: {fileID: 3954838324914479343, guid: 6fe92ca3cda0b5246815b346d72aa638, type: 3}
 --- !u!1 &664348321
 GameObject:
   m_ObjectHideFlags: 0

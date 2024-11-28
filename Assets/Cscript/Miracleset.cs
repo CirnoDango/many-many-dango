@@ -19,8 +19,8 @@ public class Miracleset : MonoBehaviour
     public GameObject miracle2;
     public GameObject miracle3;
 
-    public List<Miracle> miracleall = new() { mrc_00, mrc_01, mrc_02, mrc_03, mrc_04, mrc_05, mrc_06, mrc_07, mrc_08,mrc_09, mrc_10 };
-    public List<Miracle> miracleinchest = new() { mrc_00, mrc_01, mrc_02, mrc_03, mrc_04, mrc_05, mrc_06, mrc_07, mrc_08, mrc_09, mrc_10 };
+    public List<Miracle> miracleall =     new() { mrc_XX, mrc_00, mrc_01, mrc_02, mrc_03, mrc_04, mrc_05, mrc_06, mrc_07, mrc_08, mrc_09, mrc_10, mrc_11, mrc_12, mrc_13, };
+    public List<Miracle> miracleinchest = new() { mrc_00, mrc_01, mrc_02, mrc_03, mrc_04, mrc_05, mrc_06, mrc_07, mrc_08, mrc_09, mrc_10, mrc_11, mrc_12, mrc_13, };
     public void Start()
     {
         instance = this;
@@ -41,6 +41,11 @@ public class Miracleset : MonoBehaviour
         }
         libmiracle_number.text = libmiracle_number.text = "Miracle:" + PlayerPrefs.GetInt("miracle").ToString() + "/" + miracleall.Count.ToString();
     }
+    public static Miracle mrc_XX = new()
+    {
+        index = -1,
+        info = "幽幽子饭量-2（不会有更多奇迹了）"
+    };
     public static Miracle mrc_00 = new()
     {
         index = 0,
@@ -64,7 +69,7 @@ public class Miracleset : MonoBehaviour
     public static Miracle mrc_04 = new()
     {
         index = 4,
-        info = "喂食3个团子；幽幽子饭量-3"
+        info = "喂食4个团子；幽幽子饭量-2"
     };
     public static Miracle mrc_05 = new()
     {
@@ -79,7 +84,7 @@ public class Miracleset : MonoBehaviour
     public static Miracle mrc_07 = new()
     {
         index = 7,
-        info = "随机发现1级、2级团子各两个"
+        info = "随机发现1级、2级团子各两个(A)"
     };
     public static Miracle mrc_08 = new()
     {
@@ -96,6 +101,21 @@ public class Miracleset : MonoBehaviour
         index = 10,
         info = "扩大地图(C)"
     };
+    public static Miracle mrc_11 = new()
+    {
+        index = 11,
+        info = "发现2级宝箱团子, 若已发现：-6水需求(C)"
+    };
+    public static Miracle mrc_12 = new()
+    {
+        index = 12,
+        info = "随机发现1级、2级团子各两个(B)"
+    };
+    public static Miracle mrc_13 = new()
+    {
+        index = 13,
+        info = "随机放置3个已发现的水需求最高的团子"
+    };
     public void Miracle()
     {
         int k = Mathf.Min(3, miracleinchest.Count);
@@ -111,6 +131,7 @@ public class Miracleset : MonoBehaviour
                 mi.clickmode = "click";
                 mi.info.text = m1.info;
                 mi.miracle = m1;
+                miracleinchest.Add(mrc_XX);
                 break;
             case 2:
                 Miracle m21 = miracleinchest[0];
@@ -165,6 +186,11 @@ public class Miracleset : MonoBehaviour
     {
         switch (index)
         {
+            case -1:
+                Map.instance.real_yuyuko -= 2;
+                Game.Yuyuko(-2);
+                Game.Food(0);
+                break;
             case 0:
                 Map.instance.NextMap();
                 break;
@@ -194,7 +220,7 @@ public class Miracleset : MonoBehaviour
                 }
                 break;
             case 4:
-                Map.instance.real_yuyuko -= 3;
+                Map.instance.real_yuyuko -= 2;
                 Game.Yuyuko(-6);
                 Game.Food(0);
                 break;
@@ -251,6 +277,83 @@ public class Miracleset : MonoBehaviour
             case 10:
                 Map.instance.NextMap();
                 break;
+            case 11:
+                if (Dangoset.instance.dangoinmap.Contains(Dangoset.instance.dango_31))
+                {
+                    Dangoset.instance.dango_31.water -= 6;
+                    Dangoset.instance.boxs.Find(d31 => d31.refer_dango.index == 31).twater.text = Dangoset.instance.dango_31.water.ToString();
+                }
+                else
+                {
+                    Dangoset.instance.Box(Dangoset.instance.dango_31);
+                }
+                break;
+            case 12:
+                if (Dangoset.instance.dangoinchest.Count == 1)
+                {
+                    Dango i = Dangoset.instance.dangoinchest[0];
+                    Dangoset.instance.Box(i, 1);
+                }
+                else if (Dangoset.instance.dangoinchest.Count >= 2)
+                {
+                    System.Random r = new();
+                    Dango i, j;
+                    do
+                    {
+                        i = Dangoset.instance.dangoinchest[r.Next(Dangoset.instance.dangoinchest.Count)];
+                        j = Dangoset.instance.dangoinchest[r.Next(Dangoset.instance.dangoinchest.Count)];
+                    } while (i == j);
+                    Dangoset.instance.Box(i, 1);
+                    Dangoset.instance.Box(j, 1);
+                }
+                if (Dangoset.instance.dangoinchest2.Count == 1)
+                {
+                    Dango i = Dangoset.instance.dangoinchest2[0];
+                    Dangoset.instance.Box(i, 2);
+                }
+                else if (Dangoset.instance.dangoinchest2.Count >= 2)
+                {
+                    System.Random r = new();
+                    Dango i, j;
+                    do
+                    {
+                        i = Dangoset.instance.dangoinchest2[r.Next(Dangoset.instance.dangoinchest2.Count)];
+                        j = Dangoset.instance.dangoinchest2[r.Next(Dangoset.instance.dangoinchest2.Count)];
+                    } while (i == j);
+
+                    Dangoset.instance.Box(i, 2);
+                    Dangoset.instance.Box(j, 2);
+                }
+                break;
+            case 13:
+                int w = 0; Dango dango = new();
+                foreach(Dango d in Dangoset.instance.dangoinmap)
+                {
+                    if(d.water >= w)
+                    {
+                        w = d.water;
+                        dango = d;
+                    }
+                }
+                List<Hex> list = new();
+                foreach(Hex h in Map.instance.hexs_active)
+                {
+                    if (h.empty) { list.Add(h); }
+                }
+                System.Random rr = new();
+                while(list.Count > 3)
+                {
+                    list.RemoveAt(rr.Next(list.Count));
+                }
+                foreach(Hex ph in list)
+                {
+                    if (ph.empty) 
+                    {
+                        Game.Food(dango.food);
+                        Dangoset.instance.Put(Map.instance.hexs_active, dango, ph);
+                    } 
+                }
+                break;
         }
 
         if (PlayerPrefs.GetInt("m" + index.ToString()) == 0)
@@ -285,8 +388,6 @@ public class Miracleset : MonoBehaviour
     {
         miracle -= miracle_demand;
         miracle_demand += (miracle_demand / 10) + 1;
-        Debug.Log(miracle);
-        Debug.Log(miracle_demand);
         tmiracle.text = miracle.ToString() + "/" + miracle_demand;
         Destroy(miracle1);
         Destroy(miracle2);

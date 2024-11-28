@@ -101,6 +101,7 @@ public class Dango
     public bool dango15 = false;
     public bool dango28 = false;
     public bool dango35 = false;
+    public bool dango72 = false;
 }
 
 public class Miracle
@@ -257,6 +258,22 @@ public class Game
                     Cancel();
                     Info("choose a hex to +4 water");
                     break;
+                case "dango71":
+                    Cancel();
+                    Info("choose a hex to reverse water");
+                    break;
+                case "dango72":
+                    Cancel();
+                    Info("choose a dango to become bigger");
+                    break;
+                case "dango79":
+                    Cancel();
+                    Info("send a dango into build");
+                    break;
+                case "dango80":
+                    Cancel();
+                    Info("choose a hex to copy self");
+                    break;
             }
             //if (Dangoset.instance.newdaying && mode[0] == "put"){ Dangoset.instance.Newday();}
         }
@@ -302,6 +319,7 @@ public class Game
 
     public static List<string> Events(params string[] e)
     {
+        Debug.Log(e[0]);
         if(e.Length == 1)
         {
             Dangoset.instance.Events.Add(e[0]);
@@ -315,15 +333,16 @@ public class Game
     public static void EventExecute()
     {
         if (Clickmode() == "eat") { return; }
-        if (Events().Count == 0)
+        if (Dangoset.instance.Events.Count == 0)
         {
             Info("");
             Clickmode("put");
         }
         else
         {
-            Clickmode(Events()[0]);
-            Events().Remove(Events()[0]);
+            string s = Dangoset.instance.Events[0];
+            Dangoset.instance.Events.RemoveAt(0);
+            Clickmode(s);
         }
     }
     public static void Miracle(int m)

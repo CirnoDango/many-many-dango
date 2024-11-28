@@ -34,13 +34,18 @@ public class Buildset : MonoBehaviour
     public GameObject Image_12;
     public GameObject Image_13;
     public GameObject Image_14;
+    public GameObject Image_15;
+    public GameObject Image_16;
+    public GameObject Image_17;
     public List<Build> signall = new()
     {
-        sign_00, sign_01, sign_02, sign_03, sign_04, sign_05, sign_06, sign_07, sign_08, sign_09, sign_10, sign_11, sign_12, sign_13, sign_14
+        sign_00, sign_01, sign_02, sign_03, sign_04, sign_05, sign_06, sign_07, sign_08, sign_09, sign_10, sign_11,
+        sign_12, sign_13, sign_14, sign_15, sign_16, sign_17,
     };
     public List<Build> signinchest = new()
     {
-        sign_00, sign_01, sign_02, sign_03, sign_04, sign_05, sign_06, sign_07, sign_08, sign_09, sign_10, sign_11, sign_12, sign_13, sign_14
+        sign_00, sign_01, sign_02, sign_03, sign_04, sign_05, sign_06, sign_07, sign_08, sign_09, sign_10, sign_11,
+        sign_12, sign_13, sign_14, sign_15, sign_16, sign_17,
     };
     public void Start()
     {
@@ -138,6 +143,21 @@ public class Buildset : MonoBehaviour
         index = 14,
         info = "核能中心\n放置时：发现核能团子\n放置时：所有格子+2水\n新的一天：4格内-1水"
     };
+    public static Build sign_15 = new()
+    {
+        index = 15,
+        info = "有顶天\n放置时：发现桃子（暂缺）\n持续：3-5格内+1水，1-2格内+2水"
+    };
+    public static Build sign_16 = new()
+    {
+        index = 16,
+        info = "地狱\n放置时：发现怨灵团子\n新的一天：若相邻6格都存在团子：+2建筑"
+    };
+    public static Build sign_17 = new()
+    {
+        index = 17,
+        info = "黄鹤楼\n放置时：发现彩虹团子\n持续：2格内+1水\n新的一天：随机获得一个1级团子"
+    };
 
     public void Put(Build sign, Hex hex)
     {
@@ -230,6 +250,43 @@ public class Buildset : MonoBehaviour
                     h.Water_pe(2);
                 }
                 break;
+            case 15:
+                //Dangoset.instance.Box(Dangoset.instance.dango_05);
+                foreach (Hex h in hex.Distance(Map.instance.hexs, 1))
+                {
+                    h.Water(2);
+                }
+                foreach (Hex h in hex.Distance(Map.instance.hexs, 2))
+                {
+                    h.Water(2);
+                }
+                foreach (Hex h in hex.Distance(Map.instance.hexs, 3))
+                {
+                    h.Water(1);
+                }
+                foreach (Hex h in hex.Distance(Map.instance.hexs, 4))
+                {
+                    h.Water(1);
+                }
+                foreach (Hex h in hex.Distance(Map.instance.hexs, 5))
+                {
+                    h.Water(1);
+                }
+                break;
+            case 16:
+                Dangoset.instance.Box(Dangoset.instance.dango_52, 2);
+                break;
+            case 17:
+                Dangoset.instance.Box(Dangoset.instance.dango_13);
+                foreach (Hex h in hex.Distance(Map.instance.hexs, 1))
+                {
+                    h.Water(1);
+                }
+                foreach (Hex h in hex.Distance(Map.instance.hexs, 2))
+                {
+                    h.Water(1);
+                }
+                break;
         }
         if (PlayerPrefs.GetInt("s" + sign.index.ToString()) == 0)
         {
@@ -267,6 +324,9 @@ public class Buildset : MonoBehaviour
             12 => Image_12,
             13 => Image_13,
             14 => Image_14,
+            15 => Image_15,
+            16 => Image_16,
+            17 => Image_17,
             _ => null
         };
     }

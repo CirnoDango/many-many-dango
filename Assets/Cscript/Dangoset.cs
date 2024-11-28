@@ -100,6 +100,16 @@ public class Dangoset : MonoBehaviour
     public GameObject Image_68;
     public GameObject Image_69;
     public GameObject Image_70;
+    public GameObject Image_71;
+    public GameObject Image_72;
+    public GameObject Image_73;
+    public GameObject Image_74;
+    public GameObject Image_75;
+    public GameObject Image_76;
+    public GameObject Image_77;
+    public GameObject Image_78;
+    public GameObject Image_79;
+    public GameObject Image_80;
     public GameObject boxbox;
 
     public GameObject librarybox;
@@ -139,20 +149,23 @@ public class Dangoset : MonoBehaviour
             dango_33, dango_34, dango_35, dango_36, dango_37, dango_38, dango_39, dango_40, dango_41, dango_42, dango_43,
             dango_44, dango_45, dango_46, dango_47, dango_48, dango_49, dango_50, dango_51, dango_52, dango_53, dango_54,
             dango_55, dango_56, dango_57, dango_58, dango_59, dango_60, dango_61, dango_62, dango_63, dango_64, dango_65,
-            dango_66, dango_67, dango_68, dango_69, dango_70,
+            dango_66, dango_67, dango_68, dango_69, dango_70, dango_71, dango_72, dango_73, dango_74, dango_75,
+            dango_76, dango_77, dango_78, dango_79, dango_80,
         };
         dangoinchest = new List<Dango>
         {
             dango_00, dango_01, dango_02, dango_03, dango_04, dango_05, dango_06, dango_07, dango_08, dango_09, dango_11,
             dango_12, dango_13, dango_16, dango_17, dango_18, dango_22, dango_27, dango_28, dango_29, dango_30, dango_31,
             dango_32, dango_36, dango_38, dango_39, dango_41, dango_43, dango_45, dango_47, dango_49, dango_50, dango_51,
-            dango_53, dango_54, dango_55, dango_56, dango_59, dango_61, dango_62, dango_67, dango_68, dango_69,
+            dango_53, dango_54, dango_55, dango_56, dango_59, dango_61, dango_62, dango_67, dango_68, dango_69, dango_75,
+            dango_80,
         };
         dangoinchest2 = new List<Dango>
         {
             dango_10, dango_14, dango_15, dango_19, dango_20, dango_21, dango_23, dango_24, dango_25, dango_26, dango_33,
             dango_34, dango_35, dango_37, dango_40, dango_42, dango_44, dango_46, dango_48, dango_52, dango_57, dango_58,
-            dango_60, dango_63, dango_64, dango_65, dango_66, dango_70,
+            dango_60, dango_63, dango_64, dango_65, dango_66, dango_70, dango_71, dango_72, dango_73, dango_74, dango_76,
+            dango_77, dango_78, dango_79,
         };
         dangoinmap = new List<Dango> { };
         foreach(Dango dango in dangoinchest)
@@ -230,7 +243,7 @@ public class Dangoset : MonoBehaviour
     }
     public Dango dango_XX = new()
     {
-        info = "豌豆团子\n持续：1格内+1水",
+        info = "bug团子\n持续：???",
         index = -1,
         name = "pea",
         food = -1,
@@ -446,7 +459,7 @@ public class Dangoset : MonoBehaviour
     };
     public Dango dango_23 = new()
     {
-        info = "樱花团子\n放置时：+1奇迹\n持续：幽幽子饭量-2\n会涨价",
+        info = "樱花团子\n放置时：+1奇迹\n持续：幽幽子饭量-2\n会涨价*",
         index = 23,
         name = "sakura",
         food = 1,
@@ -761,7 +774,7 @@ public class Dangoset : MonoBehaviour
     };
     public Dango dango_58 = new()
     { 
-        info = "佛珠团子\n是14个团子\n放置时：本格水减半，幽幽子食量-2",
+        info = "佛珠团子\n是14个团子\n放置时：本格水减半，幽幽子食量-1",
         index = 58,
         name = "balls",
         food = 14,
@@ -863,7 +876,7 @@ public class Dangoset : MonoBehaviour
     {
         info = "狼人团子\n持续：1格内+1水\n新的一天：20%变身，效果x4",
         index = 69,
-        name = "ufo",
+        name = "wolf",
         food = 1,
         water = 3,
         time = 120
@@ -876,6 +889,96 @@ public class Dangoset : MonoBehaviour
         food = 1,
         water = 12,
         time = 120
+    };
+    public Dango dango_71 = new()
+    {
+        info = "逆天团子\n只能在小于等于水需求的格子放置\n放置时：选择一格改变水的符号",
+        index = 71,
+        name = "reverse",
+        food = 1,
+        water = -7,
+        time = 150
+    };
+    public Dango dango_72 = new()
+    {
+        info = "宝槌团子\n放置时：选择场上的一个团子，将其大小和制作时间翻倍(每种限一次)",
+        index = 72,
+        name = "cross",
+        food = 1,
+        water = 20,
+        time = 120
+    };
+    public Dango dango_73 = new()
+    {
+        info = "太鼓团子\n放置时：本格-8水，1-2格内+1水",
+        index = 73,
+        name = "lightning",
+        food = 1,
+        water = 12,
+        time = 180
+    };
+    public Dango dango_74 = new()
+    {
+        info = "年糕团子\n是3个团子\n放置时：若场上有3个其他年糕团子：喂食幽幽子2个团子",
+        index = 74,
+        name = "boat",
+        food = 3,
+        water = 12,
+        time = 120
+    };
+    public Dango dango_75 = new()
+    {
+        info = "经典团子\n是3个团子\n放置时：本格-1水",
+        index = 75,
+        name = "stars",
+        food = 3,
+        water = 5,
+        time = 120
+    };
+    public Dango dango_76 = new()
+    {
+        info = "睡梦团子\n持续：1格内每次放置团子：多花费00:20且幽幽子当天饭量-1",
+        index = 76,
+        name = "what",
+        food = 1,
+        water = 14,
+        time = 90
+    };
+    public Dango dango_77 = new()
+    {
+        info = "星条团子\n持续：2格内+2水\n新的一天：花费00:30",
+        index = 77,
+        name = "fish",
+        food = 1,
+        water = 6,
+        time = 150
+    };
+    public Dango dango_78 = new()
+    {
+        info = "纯粹团子\n持续：1格内+10水",
+        index = 78,
+        name = "float",
+        food = 1,
+        water = 22,
+        time = 270
+    };
+    public Dango dango_79 = new()
+    {
+        info = "空间团子\n是3个团子\n新的一天：将一格团子流放到异界，每个团子+1建筑",
+        index = 79,
+        name = "ufo",
+        food = 3,
+        water = 14,
+        time = 120
+    };
+    public Dango dango_80 = new()
+    {
+        info = "蝴蝶团子\n持续：1格内+1水\n放置时：选择一个格子：放置一个蝴蝶团子(不连锁反应)",
+        index = 80,
+        name = "note",
+        food = 1,
+        water = 7,
+        time = 150
     };
 
 
@@ -1059,7 +1162,7 @@ public class Dangoset : MonoBehaviour
                 hex.Distance(Map.instance.hexs_active, 1)[random.Next(hex.Distance(Map.instance.hexs_active, 1).Count)].Water_pe(1);
                 break;
             case 23:
-                dango_23.water += 1;
+                dango_23.water += 2;
                 boxs.Find(d10 => d10.refer_dango.index == 23).twater.text = dango_23.water.ToString();
                 Game.Miracle(1);
                 Map.instance.real_yuyuko -= 2;
@@ -1308,8 +1411,8 @@ public class Dangoset : MonoBehaviour
                 break;
             case 58:
                 hex.Water_pe(-hex.water / 2);
-                Game.Yuyuko(-2);
-                Map.instance.real_yuyuko -= 2;
+                Game.Yuyuko(-1);
+                Map.instance.real_yuyuko -= 1;
                 break;
             case 59:
                 Destroy(hex.godan);
@@ -1450,6 +1553,60 @@ public class Dangoset : MonoBehaviour
                     h.Water(1);
                 }
                 Game.Events("dango70");
+                break;
+            case 71:
+                Game.Events("dango71");
+                break;
+            case 72:
+                Game.Events("dango72");
+                break;
+            case 73:
+                hex.Water_pe(-8);
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water_pe(1);
+                }
+                foreach (Hex h in hex.Distance(map, 2))
+                {
+                    h.Water_pe(1);
+                }
+                break;
+            case 74:
+                int d74 = 0;
+                foreach(Hex h in Map.instance.hexs_active)
+                {
+                    if(!h.empty && h.dango.index == 74) { d74++; }
+                }
+                if(d74 > 3) { Game.Yuyuko(-2); }
+                break;
+            case 75:
+                hex.Water_pe(-1);
+                break;
+            case 77:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(2);
+                }
+                foreach (Hex h in hex.Distance(map, 2))
+                {
+                    h.Water(2);
+                }
+                break;
+            case 78:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(10);
+                }
+                break;
+            case 79:
+                Game.Events("dango79");
+                break;
+            case 80:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(1);
+                }
+                Game.Events("dango80");
                 break;
         }
         foreach(Hex h in Map.instance.hexs_active)
@@ -1792,6 +1949,28 @@ public class Dangoset : MonoBehaviour
                     h.Water(-1);
                 }
                 break;
+            case 77:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(-2);
+                }
+                foreach (Hex h in hex.Distance(map, 2))
+                {
+                    h.Water(-2);
+                }
+                break;
+            case 78:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(-10);
+                }
+                break;
+            case 80:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(-1);
+                }
+                break;
         }
         if(hex.dango34 < 1)
         {
@@ -1949,7 +2128,17 @@ public class Dangoset : MonoBehaviour
                     }
                 }
             }
-                if (h.sign && h.build.index == 0 && h.newday)
+            if (!h.empty && h.dango.index == 77 && h.newday)
+            {
+                h.newday = false;
+                Map.instance.Time(30);
+            }
+            if (!h.empty && h.dango.index == 78 && h.newday)
+            {
+                h.newday = false;
+                Game.Events("dango78");
+            }
+            if (h.sign && h.build.index == 0 && h.newday)
             {
                 h.newday = false;
                 foreach(Hex ah in h.Distance(Map.instance.hexs_active,1))
@@ -2065,8 +2254,43 @@ public class Dangoset : MonoBehaviour
                     nh.Water_pe(-1);
                 }
             }
-
-        }
+            if (h.sign && h.build.index == 16 && h.newday)
+            {
+                h.newday = false;
+                bool i = true;
+                foreach (Hex fh in h.Distance(Map.instance.hexs, 1))
+                {
+                    if (fh.empty || fh.sign)
+                    {
+                        i = false;
+                    }
+                }
+                if (i)
+                {
+                    Game.Build(2);
+                }
+            }
+            if (h.sign && h.build.index == 17 && h.newday)
+            {
+                h.newday = false;
+                if (dangoinchest.Count > 0)
+                {
+                    System.Random r = new();
+                    Dango i = dangoinchest[r.Next(dangoinchest.Count)];
+                    Box(i);
+                    List<Hex> lh = new();
+                    foreach (Hex ph in h.Distance(Map.instance.hexs_active, 1))
+                    {
+                        if (ph.empty) { lh.Add(ph); }
+                    }
+                    if (lh.Count > 0)
+                    {
+                        Game.Food(i.food);
+                        Put(Map.instance.hexs, i, lh[r.Next(lh.Count)]);
+                    }
+                }
+            }
+            }
         foreach (Hex h in Map.instance.hexs_active)
         {
             if (h.sign && h.build.index == 13 && h.newday)
@@ -2163,6 +2387,16 @@ public class Dangoset : MonoBehaviour
             68 => Image_68,
             69 => Image_69,
             70 => Image_70,
+            71 => Image_71,
+            72 => Image_72,
+            73 => Image_73,
+            74 => Image_74,
+            75 => Image_75,
+            76 => Image_76,
+            77 => Image_77,
+            78 => Image_78,
+            79 => Image_79,
+            80 => Image_80,
             _ => null,
         };
     }
@@ -2219,7 +2453,6 @@ public class Dangoset : MonoBehaviour
         if (dangoinchest.Count == 0)
         {
             Chestclose(1,false);
-            Game.Clickmode(Events[0]);
             Game.Info("You have found all lv1 dangos!");
             return;
         }
@@ -2373,7 +2606,7 @@ public class Dangoset : MonoBehaviour
         chest_choice1.transform.localPosition = new Vector3(-200, 150);
         chest_choice2.transform.localPosition = new Vector3(-200, -75);
         chest_choice3.transform.localPosition = new Vector3(-200, -300);
-        dango_31.water += 2;
+        dango_31.water += 1;
         boxs.Find(d31 => d31.refer_dango.index == 31).twater.text = dango_31.water.ToString();
         Game.Info("Choose one!");
     }
@@ -2714,6 +2947,28 @@ public class Dangoset : MonoBehaviour
                     h.Water(1);
                 }
                 break;
+            case 77:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(2);
+                }
+                foreach (Hex h in hex.Distance(map, 2))
+                {
+                    h.Water(2);
+                }
+                break;
+            case 78:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(10);
+                }
+                break;
+            case 80:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(1);
+                }
+                break;
         }
     }
     public void Eat_silent(List<Hex> map, Hex hex)
@@ -3006,6 +3261,28 @@ public class Dangoset : MonoBehaviour
                 }
                 break;
             case 70:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(-1);
+                }
+                break;
+            case 77:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(-2);
+                }
+                foreach (Hex h in hex.Distance(map, 2))
+                {
+                    h.Water(-2);
+                }
+                break;
+            case 78:
+                foreach (Hex h in hex.Distance(map, 1))
+                {
+                    h.Water(-10);
+                }
+                break;
+            case 80:
                 foreach (Hex h in hex.Distance(map, 1))
                 {
                     h.Water(-1);
